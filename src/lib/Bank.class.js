@@ -1,6 +1,9 @@
 
 export default class Bank {
   constructor () {
-    this.stuff = 42
+    this.balance = 0
+    this.currencyType = 'USD'
+    this.exchangeRates = {}
+    this.activity = []
   }
 }

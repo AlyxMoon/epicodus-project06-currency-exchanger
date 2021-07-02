@@ -8,7 +8,7 @@ describe('class Bank', () => {
       balance: 0,
       currencyType: 'USD',
       exchangeRates: {},
-      log: [],
+      activity: [],
     })
   })
 })
