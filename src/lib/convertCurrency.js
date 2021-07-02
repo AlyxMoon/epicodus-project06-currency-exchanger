@@ -19,6 +19,14 @@ const convertCurrency = ({
   amount = 0,
 } = {}) => {
   if (!amount) return 0
+
+  if (!(baseCurrency in exchangeRates)) {
+    throw new Error('The base currency was not found in the list of exchange rates.')
+  }
+
+  if (!(targetCurrency in exchangeRates)) {
+    throw new Error('The targetCurrency currency was not found in the list of exchange rates.')
+  }
 }
 
 export default convertCurrency
