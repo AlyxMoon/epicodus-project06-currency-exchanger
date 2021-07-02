@@ -27,4 +27,37 @@ describe('class Bank', () => {
       activity: ['something happened yesterday'],
     })
   })
+
+  describe('function addBalance()', () => {
+    let bank
+
+    beforeEach(() => {
+      bank = new Bank({
+        balance: 0,
+        currencyType: 'USD',
+        exchangeRates: { USD: 1, EUR: 0.8, MXP: 20 },
+      })
+    })
+
+    it('should add to the balance when only amount is provided', () => {
+      bank.addBalance(50)
+      expect(bank.balance).toEqual(50)
+      bank.addBalance(100)
+      expect(bank.balance).toEqual(150)
+    })
+
+    it('should add to the balance and account for currency conversion when only amount is provided', () => {
+      bank.addBalance(4, 'EUR')
+      expect(bank.balance).toEqual(5)
+      bank.addBalance(20, 'MXP')
+      expect(bank.balance).toEqual(6)
+    })
+
+    it('should add an entry to the activity', () => {
+      bank.addBalance(50)
+      expect(bank.activity.length).toEqual(1)
+      bank.addBalance(100, 'EUR')
+      expect(bank.activity.length).toEqual(2)
+    })
+  })
 })
