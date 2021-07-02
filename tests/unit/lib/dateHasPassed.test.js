@@ -21,4 +21,10 @@ describe('function dateHasPassed', () => {
 
     expect(dateHasPassed(date1, date2)).toEqual(false)
   })
+
+  it('should default date2 to current time if not provided', () => {
+    // +-100 to give test a little leeway during code execution
+    expect(dateHasPassed(new Date(Date.now() - 100))).toEqual(true)
+    expect(dateHasPassed(new Date(Date.now() + 100))).toEqual(false)
+  })
 })

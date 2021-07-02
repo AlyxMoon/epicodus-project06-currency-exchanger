@@ -5,7 +5,7 @@
  * @param {Date} date2 - second date, compared against date1
  * @returns true if date2 is greater than or equal to date1, false otherwise
  */
-const dateHasPassed = (date1, date2) => {
+const dateHasPassed = (date1, date2 = new Date()) => {
   return date1 <= date2
 }
 
