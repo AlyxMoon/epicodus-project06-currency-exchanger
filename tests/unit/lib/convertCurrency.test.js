@@ -57,4 +57,38 @@ describe('function convertCurrency()', () => {
       amount: 10,
     })).toBeCloseTo(1077.3670, 4)
   })
+
+  it('should correctly convert a currency to USD', () => {
+    expect(convertCurrency({
+      exchangeRates,
+      baseCurrency: 'EUR',
+      targetCurrency: 'USD',
+      amount: 10,
+    })).toBeCloseTo(11.8821, 4)
+
+    expect(convertCurrency({
+      exchangeRates,
+      baseCurrency: 'MXN',
+      targetCurrency: 'USD',
+      amount: 10,
+    })).toBeCloseTo(0.5002, 4)
+  })
+
+  it('should correctly convert between two non-USD currencies', () => {
+    expect(convertCurrency({
+      exchangeRates,
+      baseCurrency: 'MXN',
+      targetCurrency: 'KES',
+      amount: 100,
+    })).toBeCloseTo(538.9341, 4)
+  })
+
+  it('should return the same amount if base and target currency are the same', () => {
+    expect(convertCurrency({
+      exchangeRates,
+      baseCurrency: 'KES',
+      targetCurrency: 'KES',
+      amount: 10,
+    })).toEqual(10)
+  })
 })
