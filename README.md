@@ -56,3 +56,11 @@ If you would only like to view the website in action, go to the link here:
 - Allow users to convert currency both to and from U.S. dollars.
 - Cache the API's results - so you only need to make the call once as long as a user is on the site. Try using session storage for this. If exchange rates are successfully being stored in session storage, an API call shouldn't be made. Instead, the rates can be grabbed directly from session storage.
 - Use a dropdown menu for currencies.
+
+##### game plan
+
+- focus everything on USD, convert to/from that
+- pull API once on page load for conversion rates, then don't use it.
+- show time last updated / when will update next
+- save api call in local storage for even less API usage
+- check stored api call vs next update to see if update required
