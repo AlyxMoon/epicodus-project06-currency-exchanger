@@ -10,8 +10,18 @@ export default class Cache {
     return this._data
   }
 
+  set data (value) {
+    this.updateCache(value)
+    return this.data
+  }
+
   loadCache () {
     const cachedData = this.interface.getItem(this.key)
     this._data = cachedData || {}
+  }
+
+  updateCache (data) {
+    this.interface.setItem(this.key, data)
+    this._data = data
   }
 }
