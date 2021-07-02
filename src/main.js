@@ -59,10 +59,16 @@ const main = async () => {
 
   if (shouldCallApi(cache)) {
     try {
-      cache.data = await ExchangeRate.getApiData()
+      const data = await ExchangeRate.getApiData()
+      cache.data = data
     } catch (error) {
-      console.log(error)
-      // TODO: do something with error here
+      const elAlertBox = document.querySelector('.error-box')
+
+      elAlertBox.innerText = error.apiErrorType
+        ? error.apiErrorMessage
+        : error.message
+
+      elAlertBox.classList.remove('hide')
     }
   }
 

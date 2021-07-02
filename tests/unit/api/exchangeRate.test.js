@@ -34,7 +34,7 @@ describe('class ExchangeRateApi', () => {
     await expect(ExchangeRateApi.getApiData()).rejects.toBeTruthy()
   })
 
-  it('getApiData(): should throw an error if the server responded with an error result and include the api error type', async () => {
+  it('getApiData(): should throw an error if the server responded with an error result and include the api error type and message', async () => {
     global.fetch = jest.fn(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({

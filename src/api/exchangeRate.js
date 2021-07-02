@@ -17,6 +17,18 @@
  */
 export default class ExchangeRateApi {
   /**
+   * Used as a reference to translate an error-type from the ExchangeRate API to a user-friendly message.
+   * @static
+   */
+  static errorTypeMessages = {
+    'unsupported-code': 'The currency code used for the API was not a valid one. Please try again with a different currency code.',
+    'malformed-request': 'Something about how the API request was assembled was incorrect. This is a code issue, please let me know by opening an issue on the Github Repo linked in the footer.',
+    'invalid-key': 'The API key was invalid, this would be caused by an improper setup. Please check that it\'s the correct one given by ExchangeRate and that you put it correctly in the .env file.',
+    'inactive-account': 'The API key you used has not been activated yet, you need to confirm your email address with ExchangeRate before you can use it.',
+    'quota-reached': 'Wow, this site is way more popular than I expected! The API quota has been reached and will not be refreshed until the 2nd of the next month. Please try again then, or spin up an instance of this project yourself by following the setup instructions in the README (you can find it in the Github repo).',
+  }
+
+  /**
    *  Makes a call to the ExchangeRate API and returns the data from it
    *  @static
    *  @param {string} [currency=USD] - What currency to use as the base when comparing currencies. Default is 'USD' if not provided. Uses the standard ISO 4217 three letter currency codes.
@@ -38,6 +50,7 @@ export default class ExchangeRateApi {
     if (data.result === 'error') {
       const error = new Error('test error')
       error.apiErrorType = data['error-type']
+      error.apiErrorMessage = this.errorTypeMessages[data['error-type']]
       throw error
     }
 

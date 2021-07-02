@@ -19,6 +19,10 @@ a {
   }
 }
 
+.hide {
+  display: none !important;
+}
+
 .input-area, .output-area {
   margin: 20px 0;
   padding: 10px 15px;
@@ -27,5 +31,21 @@ a {
 
   legend {
     text-align: center;
+  }
+}
+
+.alert-area {
+  .error-box {
+    padding: 0.5rem 1rem;
+
+    background-color: #FCE4E4;
+    border: 2px solid #FCC2C3;
+    border-radius: 8px;
+
+    color: #CC0033;
+    font-size: 0.9rem;
+    font-weight: bold;
+    line-height: 1.5;
+    white-space: pre-line;
   }
 }
