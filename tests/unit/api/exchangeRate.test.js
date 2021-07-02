@@ -14,4 +14,13 @@ describe('class ExchangeRateApi', () => {
     expect(fetch).toHaveBeenCalledWith('https://v6.exchangerate-api.com/v6/123456/latest/EUR')
     expect(result).toEqual({ result: 'success' })
   })
+
+  it('getApiData(): should try to call fetch with the correct default values', async () => {
+    global.process.env = { API_KEY: 42 }
+    const result = await ExchangeRateApi.getApiData()
+
+    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(fetch).toHaveBeenCalledWith('https://v6.exchangerate-api.com/v6/42/latest/USD')
+    expect(result).toEqual({ result: 'success' })
+  })
 })
