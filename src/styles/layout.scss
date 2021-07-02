@@ -1,0 +1,41 @@
+
+header, main {
+  width: 90%;
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+header {
+  text-align: center;
+}
+
+main {
+  min-height: 100vh;
+}
+
+footer {
+  width: 100%;
+  padding: 20px 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+  background: linear-gradient(30deg, #111111, #091823);
+  border-top: 3px solid #3FB0AC;
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+  
+    gap: 10px;
+  }
+}

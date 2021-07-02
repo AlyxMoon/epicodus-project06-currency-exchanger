@@ -1,0 +1,31 @@
+@import "layout.scss";
+
+body *  {
+  box-sizing: border-box;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+a {
+  color: #3FB0AC;
+  text-decoration: none;
+
+  transition: all 0.3s;
+
+  &:hover, &:focus {
+    color: #47DAD5;
+  }
+}
+
+.input-area, .output-area {
+  margin: 20px 0;
+  padding: 10px 15px;
+
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+
+  legend {
+    text-align: center;
+  }
+}

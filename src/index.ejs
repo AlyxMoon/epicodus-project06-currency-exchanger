@@ -14,7 +14,41 @@
     <h1>Currency Exchanger</h1>
   </header>
 
-  <main></main>
+  <main>
+    <section class="input-area">
+      <form class="pure-form pure-form-aligned">
+        <fieldset>
+          <legend>Enter currency information to convert it to a different currency.</legend>
+
+          <div class="pure-control-group">
+            <label for="amount">Currency Amount</label>
+            <input type="number" id="amount" />
+          </div>
+
+          <div class="pure-control-group">
+            <label for="baseCurrency">Base Currency</label>
+            <select id="baseCurrency"></select>
+          </div>
+
+          <div class="pure-control-group">
+            <label for="targetCurrency">Target Currency</label>
+            <select id="targetCurrency"></select>
+          </div>
+
+          <div class="pure-controls">
+            <button 
+              type="submit" 
+              class="pure-button pure-button-primary"
+            >Convert</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <section class="output-area pure-form">
+      <legend>After conversion, this is your currency amount</legend>
+    </section>
+  </main>
 
   <footer>
     <a href="" class="brand">
