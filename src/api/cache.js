@@ -17,11 +17,11 @@ export default class Cache {
 
   loadCache () {
     const cachedData = this.interface.getItem(this.key)
-    this._data = cachedData || {}
+    this._data = (cachedData && JSON.parse(cachedData)) || {}
   }
 
   updateCache (data) {
-    this.interface.setItem(this.key, data)
+    this.interface.setItem(this.key, JSON.stringify(data))
     this._data = data
   }
 }

@@ -26,7 +26,7 @@ describe('class Cache', () => {
 
     it('should load data from cache when it exists', () => {
       const cacheInterface = {
-        getItem: jest.fn(() => ({ item1: 1, item2: 2 })),
+        getItem: jest.fn(() => JSON.stringify({ item1: 1, item2: 2 })),
       }
 
       const cache = new Cache(cacheInterface, 'test-cache')
@@ -38,8 +38,8 @@ describe('class Cache', () => {
 
     it('should load data from correct cache key, if multiple items exist', () => {
       const cacheData = {
-        cache1: { item1: 1 },
-        cache2: { item2: 2 },
+        cache1: JSON.stringify({ item1: 1 }),
+        cache2: JSON.stringify({ item2: 2 }),
       }
 
       const cacheInterface = {
@@ -55,7 +55,7 @@ describe('class Cache', () => {
 
     it('should load same data without pulling from storage again on subsequent calls', () => {
       const cacheInterface = {
-        getItem: jest.fn(() => ({ item1: 1, item2: 2 })),
+        getItem: jest.fn(() => JSON.stringify({ item1: 1, item2: 2 })),
       }
 
       const cache = new Cache(cacheInterface)
@@ -84,7 +84,7 @@ describe('class Cache', () => {
       expect(cacheInterface.setItem).toHaveBeenCalledTimes(1)
       expect(cacheInterface.setItem).toHaveBeenCalledWith(
         'cache',
-        { test1: 1, test2: 2 },
+        JSON.stringify({ test1: 1, test2: 2 }),
       )
     })
   })
