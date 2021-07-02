@@ -12,6 +12,7 @@ import dateHasPassed from '@/lib/dateHasPassed'
 const populateSelectOptions = (apiData) => {
   const elBaseCurrency = document.querySelector('#input-baseCurrency')
   const elTargetCurrency = document.querySelector('#input-targetCurrency')
+  const elBankCurrency = document.querySelector('#input-bankCurrency')
 
   const createOptionElement = (currency) => {
     const option = document.createElement('option')
@@ -23,6 +24,7 @@ const populateSelectOptions = (apiData) => {
   for (const currency in apiData.conversion_rates) {
     elBaseCurrency.add(createOptionElement(currency))
     elTargetCurrency.add(createOptionElement(currency))
+    elBankCurrency.add(createOptionElement(currency))
   }
 }
 
@@ -67,7 +69,32 @@ const addEventListeners = (apiData, bank) => {
       try {
         bank.addBalance(parseInt(amount) || 0, baseCurrency)
 
-        elBalanceOutput.innerText = `${bank.balance.toFixed(2)} ${bank.currencyType}`
+        elBalanceOutput.innerText = bank.balance.toFixed(2)
+
+        const latestActivity = document
+          .createElement('tr')
+          .appendChild(document.createElement('td'))
+
+        latestActivity.innerText = bank.activity[bank.activity.length - 1]
+        elBalanceTable.prepend(latestActivity.parentElement)
+      } catch (error) {
+        elAlertBox.innerText = error.message
+        elAlertBox.classList.remove('hide')
+      }
+    })
+
+  document.querySelector('#input-bankCurrency')
+    .addEventListener('change', (event) => {
+      const nextCurrency = event.target.value
+
+      const elBalanceOutput = document.querySelector('#output-bank-balance')
+      const elBalanceTable = document.querySelector('table tbody')
+      const elAlertBox = document.querySelector('.error-box')
+
+      try {
+        bank.setCurrencyType(nextCurrency)
+
+        elBalanceOutput.innerText = bank.balance.toFixed(2)
 
         const latestActivity = document
           .createElement('tr')
