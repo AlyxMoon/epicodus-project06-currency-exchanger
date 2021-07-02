@@ -2,6 +2,9 @@ const path = require('path')
 
 module.exports = {
   rootDir: path.resolve(__dirname, '..'),
+  setupFilesAfterEnv: [
+    '<rootDir>/tests/setup.js',
+  ],
   moduleFileExtensions: [
     'js',
     'json',
@@ -14,6 +17,7 @@ module.exports = {
   },
   coverageDirectory: '<rootDir>/tests/coverage',
   collectCoverageFrom: [
+    'src/api/*.js',
     'src/lib/*.js',
     '!src/main.js',
     '!**/node_modules/**',
