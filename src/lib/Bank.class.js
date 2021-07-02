@@ -28,4 +28,19 @@ export default class Bank {
     const timestamp = (new Date()).toUTCString()
     this.activity.push(`${timestamp} | You added ${amount} ${type} to your account`)
   }
+
+  setCurrencyType (type) {
+    const current = this.currencyType
+
+    this.currencyType = type
+    this.balance = convertCurrency({
+      exchangeRates: this.exchangeRates,
+      baseCurrency: current,
+      targetCurrency: type,
+      amount: this.balance,
+    })
+
+    const timestamp = (new Date()).toUTCString()
+    this.activity.push(`${timestamp} | You updated your currency type from ${current} to ${type}`)
+  }
 }
