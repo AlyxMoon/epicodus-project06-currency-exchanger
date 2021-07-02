@@ -27,6 +27,10 @@ const convertCurrency = ({
   if (!(targetCurrency in exchangeRates)) {
     throw new Error('The targetCurrency currency was not found in the list of exchange rates.')
   }
+
+  const ratio = exchangeRates.USD * exchangeRates[targetCurrency] / exchangeRates[baseCurrency]
+
+  return ratio * amount
 }
 
 export default convertCurrency
