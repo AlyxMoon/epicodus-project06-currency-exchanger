@@ -48,6 +48,14 @@ dl {
   }
 }
 
+table {
+  width: 100%;
+
+  th {
+    text-align: center;
+  }
+}
+
 .alert-area {
   .error-box {
     padding: 0.5rem 1rem;

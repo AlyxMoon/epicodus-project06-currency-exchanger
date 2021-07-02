@@ -25,6 +25,7 @@ export default class Bank {
 
     this.balance += converted
 
-    this.activity.push(`You added ${amount} ${type} to your account`)
+    const timestamp = (new Date()).toUTCString()
+    this.activity.push(`${timestamp} | You added ${amount} ${type} to your account`)
   }
 }

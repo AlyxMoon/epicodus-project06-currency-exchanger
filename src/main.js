@@ -59,6 +59,7 @@ const addEventListeners = (apiData, bank) => {
       const baseCurrency = document.querySelector('#input-baseCurrency').value
 
       const elBalanceOutput = document.querySelector('#output-bank-balance')
+      const elBalanceTable = document.querySelector('table tbody')
       const elAlertBox = document.querySelector('.error-box')
 
       elAlertBox.classList.add('hide')
@@ -67,6 +68,13 @@ const addEventListeners = (apiData, bank) => {
         bank.addBalance(parseInt(amount) || 0, baseCurrency)
 
         elBalanceOutput.innerText = `${bank.balance.toFixed(2)} ${bank.currencyType}`
+
+        const latestActivity = document
+          .createElement('tr')
+          .appendChild(document.createElement('td'))
+
+        latestActivity.innerText = bank.activity[bank.activity.length - 1]
+        elBalanceTable.prepend(latestActivity.parentElement)
       } catch (error) {
         elAlertBox.innerText = error.message
         elAlertBox.classList.remove('hide')
