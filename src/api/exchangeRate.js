@@ -28,6 +28,19 @@ export default class ExchangeRateApi {
     const endpoint = 'latest'
 
     const response = await fetch(`${url}/${apiKey}/${endpoint}/${currency}`)
-    return response.json()
+
+    if (!response.ok) {
+      throw new Error('Could not reach the API. Please try again later.')
+    }
+
+    const data = await response.json()
+
+    if (data.result === 'error') {
+      const error = new Error('test error')
+      error.apiErrorType = data['error-type']
+      throw error
+    }
+
+    return data
   }
 }

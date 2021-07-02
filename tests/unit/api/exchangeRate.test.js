@@ -34,12 +34,15 @@ describe('class ExchangeRateApi', () => {
     await expect(ExchangeRateApi.getApiData()).rejects.toBeTruthy()
   })
 
-  it('getApiData(): should throw an error if the server responded with an error result', async () => {
+  it('getApiData(): should throw an error if the server responded with an error result and include the api error type', async () => {
     global.fetch = jest.fn(() => Promise.resolve({
       ok: true,
-      json: () => Promise.resolve({ result: 'error' }),
+      json: () => Promise.resolve({
+        result: 'error',
+        'error-type': 'invalid-key',
+      }),
     }))
 
-    await expect(ExchangeRateApi.getApiData()).rejects.toBeTruthy()
+    await expect(ExchangeRateApi.getApiData()).rejects.toHaveProperty('apiErrorType', 'invalid-key')
   })
 })
