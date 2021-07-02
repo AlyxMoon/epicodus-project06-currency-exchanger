@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/main.js',
@@ -17,7 +18,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Galatic Age Calculator',
+      title: 'Currency Exchanger',
       inject: 'body',
     }),
     new CopyWebpackPlugin({
@@ -37,6 +38,7 @@ module.exports = {
         },
       ],
     }),
+    new Dotenv(),
   ],
   module: {
     rules: [

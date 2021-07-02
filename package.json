@@ -17,10 +17,12 @@
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "core-js": "3",
     "css-loader": "^5.2.6",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.29.0",
     "eslint-loader": "^4.0.2",
     "html-webpack-plugin": "^5.3.2",
     "purecss": "^2.0.6",
+    "regenerator-runtime": "^0.13.7",
     "style-loader": "^3.0.0",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2"
