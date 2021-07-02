@@ -15,12 +15,12 @@
   </header>
 
   <main>
-    <section class="alert-area">
+    <aside class="alert-area">
       <div class="error-box hide"></div>
-    </section>
+    </aside>
 
     <section class="input-area">
-      <form class="pure-form pure-form-aligned">
+      <div class="pure-form pure-form-aligned">
         <fieldset>
           <legend>Enter currency information to convert it to a different currency.</legend>
 
@@ -40,18 +40,34 @@
           </div>
 
           <div class="pure-controls">
-            <button 
-              type="submit" 
+            <button
               class="pure-button pure-button-primary"
+              data-action="convert"
             >Convert</button>
+            
+            <button 
+              class="pure-button pure-button-secondary"
+              data-action="deposit"
+            >Deposit Into The Bank</button>
           </div>
         </fieldset>
-      </form>
+      </div>
     </section>
 
     <section class="output-area pure-form">
       <legend>After conversion, this is your currency amount</legend>
       <p id="output-converted"></p>
+    </section>
+
+    <section class="bank-area pure-form">
+      <legend>It's your bank!</legend>
+      <p>Here is your personalized bank account. It only lasts while the page is open, so make it count! Feel free to add money to it at any time.</p>
+      <p>By clicking "deposit into bank" you will add that amount into your bank, determined by the base currency. Target currency is ignored when you do this.</p>
+
+      <dl>
+        <dt>Current Balance</dt>
+        <dd id="output-bank-balance"></dd>
+      </dl>
     </section>
   </main>
 

@@ -78,6 +78,7 @@ module.exports = {
     watchFiles: [
       'src/**/*.js',
       'src/**/*.css',
+      'src/**/*.scss',
       'src/**/*.html',
       'src/**/*.ejs',
     ],

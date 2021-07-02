@@ -5,6 +5,7 @@ import 'regenerator-runtime'
 import Cache from '@/api/cache'
 import ExchangeRate from '@/api/exchangeRate'
 
+import Bank from '@/lib/Bank.class'
 import convertCurrency from '@/lib/convertCurrency'
 import dateHasPassed from '@/lib/dateHasPassed'
 
@@ -25,25 +26,51 @@ const populateSelectOptions = (apiData) => {
   }
 }
 
-const addEventListeners = (apiData) => {
-  document.querySelector('.input-area form')
-    .addEventListener('submit', (event) => {
-      event.preventDefault()
-
+const addEventListeners = (apiData, bank) => {
+  document.querySelector('button[data-action="convert"]')
+    .addEventListener('click', () => {
       const amount = document.querySelector('#input-amount').value
       const baseCurrency = document.querySelector('#input-baseCurrency').value
       const targetCurrency = document.querySelector('#input-targetCurrency').value
 
-      const converted = convertCurrency({
-        exchangeRates: apiData.conversion_rates,
-        amount: parseInt(amount) || 0,
-        baseCurrency,
-        targetCurrency,
-      })
-
       const elOutput = document.querySelector('#output-converted')
+      const elAlertBox = document.querySelector('.error-box')
 
-      elOutput.innerText = `${amount} in ${baseCurrency} becomes ${converted.toFixed(2)} in ${targetCurrency}.`
+      elAlertBox.classList.add('hide')
+
+      try {
+        const converted = convertCurrency({
+          exchangeRates: apiData.conversion_rates,
+          amount: parseInt(amount) || 0,
+          baseCurrency,
+          targetCurrency,
+        })
+
+        elOutput.innerText = `${amount} in ${baseCurrency} becomes ${converted.toFixed(2)} in ${targetCurrency}.`
+      } catch (error) {
+        elAlertBox.innerText = error.message
+        elAlertBox.classList.remove('hide')
+      }
+    })
+
+  document.querySelector('button[data-action="deposit"]')
+    .addEventListener('click', () => {
+      const amount = document.querySelector('#input-amount').value
+      const baseCurrency = document.querySelector('#input-baseCurrency').value
+
+      const elBalanceOutput = document.querySelector('#output-bank-balance')
+      const elAlertBox = document.querySelector('.error-box')
+
+      elAlertBox.classList.add('hide')
+
+      try {
+        bank.addBalance(parseInt(amount) || 0, baseCurrency)
+
+        elBalanceOutput.innerText = `${bank.balance.toFixed(2)} ${bank.currencyType}`
+      } catch (error) {
+        elAlertBox.innerText = error.message
+        elAlertBox.classList.remove('hide')
+      }
     })
 }
 
@@ -72,8 +99,12 @@ const main = async () => {
     }
   }
 
+  const bank = new Bank({
+    exchangeRates: cache.data.conversion_rates || {},
+  })
+
   populateSelectOptions(cache.data)
-  addEventListeners(cache.data)
+  addEventListeners(cache.data, bank)
 }
 
 main()

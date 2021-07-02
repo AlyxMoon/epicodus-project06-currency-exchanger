@@ -23,7 +23,7 @@ a {
   display: none !important;
 }
 
-.input-area, .output-area {
+section {
   margin: 20px 0;
   padding: 10px 15px;
 
@@ -31,6 +31,20 @@ a {
 
   legend {
     text-align: center;
+  }
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin: 0;
   }
 }
 
