@@ -60,4 +60,27 @@ describe('class Bank', () => {
       expect(bank.activity.length).toEqual(2)
     })
   })
+
+  describe('function setCurrencyType()', () => {
+    let bank
+
+    beforeEach(() => {
+      bank = new Bank({
+        balance: 10,
+        currencyType: 'USD',
+        exchangeRates: { USD: 1, EUR: 0.8, MXP: 20 },
+      })
+    })
+
+    it('should update the currencyType and convert the balance', () => {
+      bank.setCurrencyType('EUR')
+      expect(bank.currencyType).toEqual('EUR')
+      expect(bank.balance).toEqual(8)
+    })
+
+    it('should add an entry to the activity log', () => {
+      bank.setCurrencyType('EUR')
+      expect(bank.activity.length).toEqual(1)
+    })
+  })
 })
